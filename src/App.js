@@ -1,23 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
+import words from './words';
+import { useEffect, useState } from 'react';
+import TheBoard from './TheBoard';
 
 function App() {
+  const [word, setWord] = useState("");
+  useEffect(() => {
+    setWord(words[Math.floor(Math.random()*words.length)]);
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1> TODAY'S RANDOM WORD: {word} </h1>
+      {/* <MyBoard word={word}/> */}
+      <TheBoard />
     </div>
   );
 }

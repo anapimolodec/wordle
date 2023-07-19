@@ -3,7 +3,7 @@ import words from './words';
 import { useEffect, useState } from 'react';
 
 const WORD_LEN = 5;
-const LINES = 1;
+const LINES = 6;
 
 function App() {
   const [word, setWord] = useState("");
@@ -11,7 +11,6 @@ function App() {
   const [lines, setLine] = useState(new Array(LINES).fill(''));
   const [index, setIndex] = useState(0);
   useEffect(() => {
-    console.log("INITIAL RENDER");
     setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());
   }, [])
   const isLetter = (char) => {
@@ -19,6 +18,10 @@ function App() {
     return (char.length === 1 && charCode >= 97 && charCode <= 122);
   }
   const onTyping = event => {
+    if (lines.includes(word) || index > 5) {
+      console.log("CONGRATULATIONS!!!")
+      return ;
+    }
     if (event.key === "Backspace") {
       setTyping(typing.slice(0, -1));
     } else if (event.key === "Enter" && typing.length === WORD_LEN) {
@@ -36,11 +39,8 @@ function App() {
   return (
     <div>
       <h1> TODAY'S RANDOM WORD: {word} </h1>
-      <div  tabIndex={0} onKeyDown={onTyping}> current guess: {typing}  </div>
-      <div className='board'>
+      <div className='board' tabIndex={0} onKeyDown={onTyping}>
         {lines.map((line, i) => {
-          console.log(index > i || index === -1);
-          console.log("LINE: ", i, line);
           return <OneLine 
             key={i} 
             line={(i === index ? typing : line).padEnd(WORD_LEN)}
@@ -58,7 +58,6 @@ return (
     { 
     line.split('').map((char, i) => {
       let classname = 'tile';
-      console.log(char, " and ", word[i]);
       if (toCheck) {
         if (char === word[i]) {
           classname += ' correct';
@@ -68,7 +67,6 @@ return (
           classname += ' incorrect';
         }
       }
-      console.log(classname);
     return <div key={i} className={classname}> {char}</div>;
   })
   }

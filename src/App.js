@@ -1,6 +1,8 @@
 import './App.css';
 import words from './words';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import OneLine from './OneLine';
+import Answer from './Answer';
 
 const WORD_LEN = 5;
 const LINES = 6;
@@ -19,7 +21,6 @@ function App() {
   }
   const onTyping = event => {
     if (lines.includes(word) || index > 5) {
-      console.log("CONGRATULATIONS!!!")
       return ;
     }
     if (event.key === "Backspace") {
@@ -37,9 +38,14 @@ function App() {
   if (word == null) return null;
   
   return (
-    <div>
-      <h1> TODAY'S RANDOM WORD: {word} </h1>
-      <div className='board' tabIndex={0} onKeyDown={onTyping}>
+    <div className='main bg-bej' tabIndex={0} onKeyDown={onTyping}>
+      <h1 class="flex items-center text-5xl font-extrabold m-5 mt-[10%]">
+        WORDLE
+        <span class="bg-kok text-xl font-semibold mr-2 px-2.5 py-0.5 rounded m-2">clone
+        </span>
+      </h1>
+
+      <div className='board'>
         {lines.map((line, i) => {
           return <OneLine 
             key={i} 
@@ -47,30 +53,12 @@ function App() {
             toCheck = {index > i || index === -1}
             word = {word} />;
         })}
+
       </div>
-        
-    </div>
+      <Answer word={word} />
+     </div>
+
   );
 }
-const OneLine = ({line, toCheck, word}) => {
-return (
-  <div className='line'>
-    { 
-    line.split('').map((char, i) => {
-      let classname = 'tile';
-      if (toCheck) {
-        if (char === word[i]) {
-          classname += ' correct';
-        } else if (word.includes(char)) {
-          classname += ' close';
-        } else {
-          classname += ' incorrect';
-        }
-      }
-    return <div key={i} className={classname}> {char}</div>;
-  })
-  }
-  </div>
-);
-}
+
 export default App;

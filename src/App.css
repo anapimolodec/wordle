@@ -1,3 +1,11 @@
+.main {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
 .board {
   display: flex;
   flex-direction: column;
@@ -14,22 +22,16 @@
 .tile {
   width: 40px;
   height: 40px;
-  font-size: 30px;
-  border: 1px solid black;
-  text-transform: capitalize;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.correct {
-  background-color: lightgreen;
-}
-
-.close {
-  background-color: yellow;
 }
 
 .incorrect {
   background-color: lightgrey;
+}
+
+#togglebutton ::after {
+  content: '';
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  border: 1px solid black;
 }

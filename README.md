@@ -12,3 +12,6 @@ As the app fetches a random word every time the page is loaded ...
 `npm start`
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### Great Refenrences:
+- [useLocalStorage Hook](https://blog.logrocket.com/using-localstorage-react-hooks/).

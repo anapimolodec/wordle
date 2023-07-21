@@ -1,7 +1,7 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import OneLine from './OneLine';
-
+import Winner from './Winner';
 
 const MyBoard = ({word, goReset}) => {
     const WORD_LEN = 5;
@@ -9,13 +9,16 @@ const MyBoard = ({word, goReset}) => {
     const [typing, setTyping] = useState("");
     const [lines, setLine] = useState(new Array(LINES).fill(''));
     const [index, setIndex] = useState(0);
-    // useEffect(() => {
-    //   if (lines.includes(word)) {
-    //     console.log("congratualations????");
-    //   } else if (index > 5) {
-    //     console.log("gameover");
-    //   }
-    // },[lines, index])
+    const [result, setResult] = useState(false);
+    useEffect(() => {
+      if (lines.includes(word)) {
+        console.log("congratualations????");
+        setResult(true);
+      } else if (index > 5) {
+        console.log("gameover");
+        setResult(false);
+      }
+    },[lines, index])
 
     const isLetter = (char) => {
         const charCode = char.toLowerCase().charCodeAt(0);
@@ -38,6 +41,7 @@ const MyBoard = ({word, goReset}) => {
         }
     }
     return (
+      <>
     <div className='board flex gap-3 flex-col p-3' tabIndex={0} onKeyDown={onTyping}>
         {lines.map((line, i) => {
           return <OneLine 
@@ -47,6 +51,8 @@ const MyBoard = ({word, goReset}) => {
             word = {word} />;
         })}
       </div>
+    <Winner result={result}/>
+  </>
     );
     
 }

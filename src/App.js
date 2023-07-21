@@ -7,9 +7,10 @@ import MyBoard from './MyBoard';
 function App() {
   const [word, setWord] = useLocalStorage("theword", "");
   const [reset, setReset] = useLocalStorage("reset", false);
+
   const goReset = () => {
     setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());
-    setReset(false);
+    if (reset) setReset(false);
   }
   const goRefresh = () => {
     window.location.reload(false);

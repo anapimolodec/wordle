@@ -1,46 +1,55 @@
-// import './App.css';
-// import { useEffect, useState } from 'react';
+import './App.css';
+import { useEffect, useState } from 'react';
+import OneLine from './OneLine';
 
-// const MyBoard = ({word}) => {
-//     if (word == null) return;
-//     const WORD_LEN = 5;
-//     const WORD_CNT = 6;
-//     const [guesses, setGuesses] = useState(Array(WORD_CNT).fill(null));
 
-//     useEffect(() => {
-        
-//     }, [guesses, word]);
+const MyBoard = ({word, goReset}) => {
+    const WORD_LEN = 5;
+    const LINES = 6;
+    const [typing, setTyping] = useState("");
+    const [lines, setLine] = useState(new Array(LINES).fill(''));
+    const [index, setIndex] = useState(0);
+    const [reset, setReset] = useState(false);
+    useEffect(() => {
+      if (lines.includes(word)) {
+        console.log("congratualations????");
+      } else if (index > 5) {
+        console.log("gameover");
+      }
+    },[lines])
 
-//     const currentGuessIndex = guesses.findIndex(guess => guess == null)
-//     return (
-//         <div className='board'>
-//             {guesses.map((guess, i) => {
-//                 let fillGuess = (guess === currentGuessIndex ? currentGuess : guess ?? '').padEnd(WORD_LEN);
-//                 return (
-//                     <GuessLine 
-//                     key = {i}
-//                     guess={fillGuess}
-//                     word={word}
-//                     />
-//                 );
-//             })}
-
-//         </div>
-//     );
-// }
-// const GuessLine = (props) => {
-//     return (
-//         <div className='line'>
-//                     {guess.split('').map((char, i) => {
-//                         return (
-//                         <div className='tile' key={i}>
-//                             {char}
-//                         </div>
-//                         );
-//                     })}
-//                 </div>
-//     );
+    const isLetter = (char) => {
+        const charCode = char.toLowerCase().charCodeAt(0);
+        return (char.length === 1 && charCode >= 97 && charCode <= 122);
+      }
+    const onTyping = event => {
+        if (lines.includes(word) || index > 5) {
+          return ;
+        }
+        if (event.key === "Backspace") {
+          setTyping(typing.slice(0, -1));
+        } else if (event.key === "Enter" && typing.length === WORD_LEN) {
+          let linesClone = [...lines];
+          linesClone[index] = typing;
+          setLine(linesClone);
+          setIndex(index => index + 1);
+          setTyping('');
+        } else if (isLetter(event.key) && typing.length < WORD_LEN) {
+          setTyping(typing + event.key.toLowerCase());
+        }
+    }
+    return (
+    <div className='board flex gap-3 flex-col p-3' tabIndex={0} onKeyDown={onTyping}>
+        {lines.map((line, i) => {
+          return <OneLine 
+            key={i} 
+            line={(i === index ? typing : line).padEnd(WORD_LEN)}
+            toCheck = {index > i || index === -1}
+            word = {word} />;
+        })}
+      </div>
+    );
     
-// }
-// export default MyBoard;
+}
 
+export default MyBoard;

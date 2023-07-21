@@ -23,7 +23,7 @@ const Answer = ({word}) => {
       <span className="ml-3"> {isChecked ? "Hide Answer" : "Show Answer"}</span>
       
     </label>
-    {isChecked ? <p className="mt-3">The word is: <span className="text-jasyl font-extrabold uppercase">{word}</span></p> : null}
+    {isChecked ? <p className="mt-3">The word is: <span className="text-jasyl font-extrabold uppercase">{word}</span></p> : <p> </p>}
     </div>
   )
 }

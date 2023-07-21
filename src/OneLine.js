@@ -1,6 +1,6 @@
 const OneLine = ({line, toCheck, word}) => {
     return (
-      <div className='line'>
+      <div className='flex gap-3 m-auto'>
         { 
         line.split('').map((char, i) => {
           let checking = 'h-11 w-11 p-6 font-semibold leading-9 rounded-lg shadow capitalize flex justify-center items-center';

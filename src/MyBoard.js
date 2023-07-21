@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import OneLine from './OneLine';
 import Winner from './Winner';
 
@@ -10,15 +10,6 @@ const MyBoard = ({word, goReset}) => {
     const [lines, setLine] = useState(new Array(LINES).fill(''));
     const [index, setIndex] = useState(0);
     const [result, setResult] = useState(false);
-    useEffect(() => {
-      if (lines.includes(word)) {
-        console.log("congratualations????");
-        setResult(true);
-      } else if (index > 5) {
-        console.log("gameover");
-        setResult(false);
-      }
-    },[lines, index])
 
     const isLetter = (char) => {
         const charCode = char.toLowerCase().charCodeAt(0);

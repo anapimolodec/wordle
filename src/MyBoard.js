@@ -9,14 +9,13 @@ const MyBoard = ({word, goReset}) => {
     const [typing, setTyping] = useState("");
     const [lines, setLine] = useState(new Array(LINES).fill(''));
     const [index, setIndex] = useState(0);
-    const [reset, setReset] = useState(false);
     useEffect(() => {
       if (lines.includes(word)) {
         console.log("congratualations????");
       } else if (index > 5) {
         console.log("gameover");
       }
-    },[lines])
+    },[lines, index])
 
     const isLetter = (char) => {
         const charCode = char.toLowerCase().charCodeAt(0);

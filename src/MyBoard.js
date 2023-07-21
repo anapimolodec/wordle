@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import OneLine from './OneLine';
-import Winner from './Winner';
+// import Winner from './Winner';
 
 const MyBoard = ({word, goReset}) => {
     const WORD_LEN = 5;
@@ -9,7 +9,7 @@ const MyBoard = ({word, goReset}) => {
     const [typing, setTyping] = useState("");
     const [lines, setLine] = useState(new Array(LINES).fill(''));
     const [index, setIndex] = useState(0);
-    const [result, setResult] = useState(false);
+    // const [result, setResult] = useState(false);
 
     const isLetter = (char) => {
         const charCode = char.toLowerCase().charCodeAt(0);
@@ -42,7 +42,7 @@ const MyBoard = ({word, goReset}) => {
             word = {word} />;
         })}
       </div>
-    <Winner result={result}/>
+    {/* <Winner result={result}/> */}
   </>
     );
     

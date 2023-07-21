@@ -1,12 +1,17 @@
 import './App.css';
 import words from './words';
 import Answer from './Answer';
+import { useEffect } from 'react';
 import { useLocalStorage } from "./useLocalStorage";
 import MyBoard from './MyBoard';
 
 function App() {
   const [word, setWord] = useLocalStorage("theword", "");
   const [reset, setReset] = useLocalStorage("reset", false);
+
+  useEffect(() => {
+    setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());
+  }, []);
 
   const goReset = () => {
     setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());
@@ -18,9 +23,9 @@ function App() {
   if (word == null) return null;
   return (
     <div className='main bg-bej'>
-      <h1 class="flex items-center text-5xl font-extrabold m-5 mt-5">
+      <h1 className="flex items-center text-5xl font-extrabold m-5 mt-5">
         WORDLE
-        <span class="bg-kok text-xl font-semibold mr-2 px-2.5 py-0.5 rounded m-2">clone</span>
+        <span className="bg-kok text-xl font-semibold mr-2 px-2.5 py-0.5 rounded m-2">clone</span>
       </h1>
       <MyBoard word = {word} goReset={goReset}/>
       <Answer word={word} />

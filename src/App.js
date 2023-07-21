@@ -1,7 +1,6 @@
 import './App.css';
 import words from './words';
 import Answer from './Answer';
-// import { useEffect } from 'react';
 import { useLocalStorage } from "./useLocalStorage";
 import MyBoard from './MyBoard';
 
@@ -11,9 +10,9 @@ function App() {
   const [word, setWord] = useLocalStorage("theword", "");
   const [reset, setReset] = useLocalStorage("reset", false);
 
-    if (localStorage.getItem("theword") == null) {
+  if (localStorage.getItem("theword") == null) {
       setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());
-    }
+  }
 
   const goReset = () => {
     setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());

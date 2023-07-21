@@ -10,7 +10,7 @@ const OneLine = ({line, toCheck, word}) => {
             } else if (word.includes(char)) {
               checking += ' bg-sary';
             } else {
-              checking += ' bg-kok';
+              checking += ' bg-bej';
             }
           } else {
             checking += ' bg-aq';

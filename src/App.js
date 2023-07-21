@@ -1,26 +1,31 @@
 import './App.css';
 import words from './words';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import OneLine from './OneLine';
 import Answer from './Answer';
+import { useLocalStorage } from "./useLocalStorage";
 
 const WORD_LEN = 5;
 const LINES = 6;
 
 function App() {
-  const [word, setWord] = useState("");
+  const [word, setWord] = useLocalStorage("theword", "");
+  const [reset, setReset] = useLocalStorage("reset", false);
   const [typing, setTyping] = useState("");
   const [lines, setLine] = useState(new Array(LINES).fill(''));
   const [index, setIndex] = useState(0);
-  useEffect(() => {
+  const goReset = () => {
     setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());
-  }, [])
+    setReset(false);
+    window.location.reload(false);
+  }
   const isLetter = (char) => {
     const charCode = char.toLowerCase().charCodeAt(0);
     return (char.length === 1 && charCode >= 97 && charCode <= 122);
   }
   const onTyping = event => {
     if (lines.includes(word) || index > 5) {
+      setReset(true);
       return ;
     }
     if (event.key === "Backspace") {
@@ -39,7 +44,7 @@ function App() {
   
   return (
     <div className='main bg-bej' tabIndex={0} onKeyDown={onTyping}>
-      <h1 class="flex items-center text-5xl font-extrabold m-5 mt-[10%]">
+      <h1 class="flex items-center text-5xl font-extrabold m-5 mt-5">
         WORDLE
         <span class="bg-kok text-xl font-semibold mr-2 px-2.5 py-0.5 rounded m-2">clone
         </span>
@@ -56,6 +61,9 @@ function App() {
 
       </div>
       <Answer word={word} />
+      
+      <p> Update the page to reset the table, and click the button below to get another word!</p>
+      <button onClick={goReset}>Change the word</button>
      </div>
 
   );

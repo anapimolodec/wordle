@@ -4,8 +4,6 @@ import Answer from './Answer';
 import { useLocalStorage } from "./useLocalStorage";
 import MyBoard from './MyBoard';
 
-// import useWindowSize from 'react-use/lib/useWindowSize';
-
 function App() {
   const [word, setWord] = useLocalStorage("theword", "");
   const [reset, setReset] = useLocalStorage("reset", false);
@@ -17,6 +15,7 @@ function App() {
   const goReset = () => {
     setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());
     if (reset) setReset(false);
+    window.location.reload(false);
   }
   const goRefresh = () => {
     window.location.reload(false);
@@ -31,7 +30,6 @@ function App() {
       <MyBoard word = {word} goReset={goReset}/>
       <Answer word={word} />
       <MyButtons goReset={goReset} goRefresh={goRefresh} />
-
      </div>
   );
 }
@@ -39,8 +37,8 @@ function App() {
 const MyButtons = ({goReset, goRefresh}) => {
   return (
   <div className="flex gap-x-5">
-      <button className="bg-kok shadow hover:bg-jasyl text-aq font-bold py-2 px-4 rounded-lg" onClick={goRefresh}>Refresh Table</button>
-      <button className="bg-kok shadow hover:bg-jasyl text-aq font-bold py-2 px-4 rounded-lg" onClick={goReset}>Refresh Word</button>
+      <button className="bg-kok shadow hover:bg-jasyl text-aq font-bold py-2 px-4 rounded-lg" onClick={goRefresh}>Reset Table</button>
+      <button className="bg-kok shadow hover:bg-jasyl text-aq font-bold py-2 px-4 rounded-lg" onClick={goReset}>New Word</button>
   </div>);
 }
 export default App;

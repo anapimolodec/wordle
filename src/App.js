@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());
-  }, []);
+  }, );
 
   const goReset = () => {
     setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());

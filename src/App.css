@@ -7,7 +7,7 @@
   height: 100vh;
 }
 
-.board:focus-within {
+.board:focus-within, .board:focus, .board:focus-visible{
   border: thin solid #A1CCD1;
   padding: 10px;
   border-radius: 0.5rem;

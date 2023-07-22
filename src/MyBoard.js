@@ -32,24 +32,24 @@ const MyBoard = ({word, goReset}) => {
           setIndex(index => index + 1);
           setTyping('');
           if (typing === word) { setRes(true); }
-          else if (index === 5) {setRes(false); }
+          else if (index === 5) { setRes(false); }
         } else if (isLetter(event.key) && typing.length < WORD_LEN) {
           setTyping(typing + event.key.toLowerCase());
         }
     }
     return (
-      <>
-      <div className='board flex gap-3 flex-col p-3' tabIndex={0} onKeyDown={onTyping}>
-        {lines.map((line, i) => {
-          return <OneLine 
-            key={i} 
-            line={(i === index ? typing : line).padEnd(WORD_LEN)}
-            toCheck = {index > i || index === -1}
-            word = {word} />;
-        })}
+      <div className=''>
+        <div className='board flex gap-3 flex-col p-3' tabIndex={0} onKeyDown={onTyping}>
+          {lines.map((line, i) => {
+            return <OneLine 
+              key={i} 
+              line={(i === index ? typing : line).padEnd(WORD_LEN)}
+              toCheck = {index > i || index === -1}
+              word = {word} />;
+          })}
+        </div>
+        <div> {res ? <Winner goReset={goReset} /> : (res === false ? <Loser goReset={goReset} word={word}/> : null)} </div>
       </div>
-      <div> {res ? <Winner /> : (res === false ? <Loser /> : null)} </div>
-      </>
     );
     
 }

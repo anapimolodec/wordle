@@ -13,9 +13,9 @@ function App() {
   }
 
   const goReset = () => {
+    window.location.reload(false);
     setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());
     if (reset) setReset(false);
-    window.location.reload(false);
   }
   const goRefresh = () => {
     window.location.reload(false);

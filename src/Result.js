@@ -1,15 +1,18 @@
 import Confetti from 'react-confetti';
+import {useState} from 'react';
 
 export const Winner = ({goReset}) => {
+    const [showButton, setShowButton] = useState(false);
     return (
     <>
         <div className="mt-5 p-5 mx-auto text-center flex flex-col justify-center align-center border-aq bg-jasyl rounded-lg shadow">
             <h5 className="text-xl font-semibold text-aq font-extrabold uppercase">Congratulations!</h5>
-            <button onClick={goReset} className="mt-5 bg-kok shadow hover:bg-bej text-aq hover:text-jasyl font-bold py-2 px-4 rounded-lg">One more game!</button>
+            {showButton && <button onClick={goReset} className="mt-5 bg-kok shadow hover:bg-bej text-aq hover:text-jasyl font-bold py-2 px-4 rounded-lg">One more game!</button>}
         </div>
         <Confetti 
             numberOfPieces={500}
-            recycle={false}/>
+            recycle={false}
+            onConfettiComplete={() =>  setShowButton(true)}/>
     </>
     );
 }

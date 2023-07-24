@@ -13,7 +13,7 @@ function App() {
   }
 
   const goReset = () => {
-    window.location.reload(false);
+    window.location.reload(true);
     setWord(words[Math.floor(Math.random()*words.length)].toLowerCase());
     if (reset) setReset(false);
   }
